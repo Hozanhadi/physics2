@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تمثيل الحركة - أول ثانوي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    * {
+      font-family: 'Tajawal', sans-serif;
+    }
+    .nav-btn.active {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+    }
+    .card {
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .slide-in {
+      animation: slideIn 0.5s ease-out forwards;
+    }
+    .graph-container {
+      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+    }
+    .table-row:nth-child(even) {
+      background-color: rgba(14, 165, 233, 0.05);
+    }
+    .highlight-box {
+      border-right: 4px solid #0ea5e9;
+      background: linear-gradient(90deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 text-slate-800 overflow-auto">
+  <div class="min-h-full w-full"><!-- Header -->
+   <header class="bg-gradient-to-l from-sky-600 via-sky-500 to-cyan-500 text-white py-8 px-4 shadow-xl relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+     <div class="absolute top-5 right-10 w-20 h-20 border-4 border-white rounded-full"></div>
+     <div class="absolute bottom-5 left-20 w-32 h-32 border-4 border-white rounded-full"></div>
+     <div class="absolute top-10 left-1/3 w-16 h-16 border-4 border-white rounded-full"></div>
+    </div>
+    <div class="max-w-6xl mx-auto text-center relative z-10">
+     <div class="float-animation inline-block mb-4">
+      <svg class="w-16 h-16 mx-auto" viewbox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="white" stroke-width="3" stroke-dasharray="8 4" /> <circle cx="32" cy="32" r="8" fill="white" /> <path d="M32 32 L50 20" stroke="white" stroke-width="3" stroke-linecap="round" /> <circle cx="50" cy="20" r="4" fill="#fbbf24" />
+      </svg>
+     </div>
+     <h1 id="main-title" class="text-4xl md:text-5xl font-extrabold mb-2 drop-shadow-lg">تمثيل الحركة</h1>
+     <p id="subtitle" class="text-xl md:text-2xl opacity-90 font-medium">أول ثانوي</p>
+    </div>
+   </header><!-- Navigation -->
+   <nav class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-sky-100">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+     <div class="flex flex-wrap justify-center gap-2"><button onclick="showSection('intro')" class="nav-btn active px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">المقدمة</button> <button onclick="showSection('verbal')" class="nav-btn px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">التمثيل اللفظي</button> <button onclick="showSection('tables')" class="nav-btn px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">الجداول</button> <button onclick="showSection('graphs')" class="nav-btn px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">الرسوم البيانية</button> <button onclick="showSection('images')" class="nav-btn px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">الصور المتتابعة</button> <button onclick="showSection('summary')" class="nav-btn px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">الملخص</button> <button onclick="showSection('interactive')" class="nav-btn px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:bg-sky-100">تفاعلي</button>
+     </div>
+    </div>
+   </nav><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-4 py-8"><!-- Introduction Section -->
+    <section id="intro" class="section slide-in">
+     <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100">
+      <div class="flex items-center gap-4 mb-6">
+       <div class="w-14 h-14 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">❓</span>
+       </div>
+       <h2 class="text-3xl font-extrabold text-sky-700">ما هو تمثيل الحركة؟</h2>
+      </div>
+      <p class="text-xl leading-relaxed mb-8 text-slate-600">تمثيل الحركة هو <strong class="text-sky-600">وصف حركة جسم مع الزمن</strong> باستخدام طرق مختلفة لفهم كيفية تحرك الأجسام.</p>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+       <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 text-center border-2 border-amber-200 hover:border-amber-400 transition-all"><span class="text-5xl mb-4 block">📝</span>
+        <h3 class="font-bold text-xl text-amber-700">الكلمات</h3>
+        <p class="text-slate-600 mt-2">وصف لفظي للحركة</p>
+       </div>
+       <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 text-center border-2 border-emerald-200 hover:border-emerald-400 transition-all"><span class="text-5xl mb-4 block">📊</span>
+        <h3 class="font-bold text-xl text-emerald-700">الجداول</h3>
+        <p class="text-slate-600 mt-2">بيانات رقمية منظمة</p>
+       </div>
+       <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 text-center border-2 border-violet-200 hover:border-violet-400 transition-all"><span class="text-5xl mb-4 block">📈</span>
+        <h3 class="font-bold text-xl text-violet-700">الرسوم البيانية</h3>
+        <p class="text-slate-600 mt-2">تمثيل بصري للبيانات</p>
+       </div>
+      </div>
+      <div class="highlight-box rounded-xl p-6">
+       <h3 class="font-bold text-lg text-sky-700 mb-4">🎯 نستخدمه لفهم:</h3>
+       <div class="flex flex-wrap gap-3"><span class="bg-slate-100 px-4 py-2 rounded-full text-slate-700 font-medium">هل الجسم ساكن؟</span> <span class="bg-sky-100 px-4 py-2 rounded-full text-sky-700 font-medium">هل هو سريع؟</span> <span class="bg-amber-100 px-4 py-2 rounded-full text-amber-700 font-medium">هل هو بطيء؟</span> <span class="bg-emerald-100 px-4 py-2 rounded-full text-emerald-700 font-medium">هل هو متسارع؟</span>
+       </div>
+      </div>
+     </div>
+    </section><!-- Verbal Representation -->
+    <section id="verbal" class="section hidden">
+     <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100 slide-in">
+      <div class="flex items-center gap-4 mb-6">
+       <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">💬</span>
+       </div>
+       <h2 class="text-3xl font-extrabold text-amber-600">أولًا: التمثيل اللفظي</h2>
+      </div>
+      <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200">
+       <p class="text-2xl font-bold text-amber-700 mb-6">نصف الحركة بالكلام</p>
+       <div class="bg-white rounded-xl p-6 shadow-md">
+        <div class="flex items-center gap-3 mb-4"><span class="text-2xl">📌</span> <span class="font-bold text-lg text-slate-700">مثال:</span>
+        </div>
+        <p class="text-xl text-slate-600 leading-relaxed pr-10">"يتحرك الطالب <strong class="text-amber-600">بسرعة ثابتة</strong> في <strong class="text-amber-600">خط مستقيم</strong>."</p>
+       </div>
+       <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <div class="bg-white/80 rounded-xl p-4 border border-amber-200"><span class="text-xl">✨</span> <span class="font-medium text-slate-700">سهل الفهم والتواصل</span>
+        </div>
+        <div class="bg-white/80 rounded-xl p-4 border border-amber-200"><span class="text-xl">📖</span> <span class="font-medium text-slate-700">يوضح الحالة العامة</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Tables Representation -->
+    <section id="tables" class="section hidden">
+     <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100 slide-in">
+      <div class="flex items-center gap-4 mb-6">
+       <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-green-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">📊</span>
+       </div>
+       <h2 class="text-3xl font-extrabold text-emerald-600">ثانيًا: التمثيل بالجداول</h2>
+      </div>
+      <p class="text-xl text-slate-600 mb-6">نربط بين <strong class="text-emerald-600">الزمن</strong> و <strong class="text-emerald-600">المسافة (الموقع)</strong>.</p>
+      <div class="overflow-x-auto mb-8">
+       <table class="w-full max-w-md mx-auto rounded-2xl overflow-hidden shadow-lg">
+        <thead>
+         <tr class="bg-gradient-to-l from-emerald-500 to-green-500 text-white">
+          <th class="py-4 px-8 text-xl font-bold">الزمن (ث)</th>
+          <th class="py-4 px-8 text-xl font-bold">المسافة (م)</th>
+         </tr>
+        </thead>
+        <tbody class="bg-white">
+         <tr class="table-row border-b border-emerald-100">
+          <td class="py-4 px-8 text-center text-xl font-semibold text-slate-700">0</td>
+          <td class="py-4 px-8 text-center text-xl font-semibold text-emerald-600">0</td>
+         </tr>
+         <tr class="table-row border-b border-emerald-100">
+          <td class="py-4 px-8 text-center text-xl font-semibold text-slate-700">1</td>
+          <td class="py-4 px-8 text-center text-xl font-semibold text-emerald-600">4</td>
+         </tr>
+         <tr class="table-row border-b border-emerald-100">
+          <td class="py-4 px-8 text-center text-xl font-semibold text-slate-700">2</td>
+          <td class="py-4 px-8 text-center text-xl font-semibold text-emerald-600">8</td>
+         </tr>
+         <tr class="table-row">
+          <td class="py-4 px-8 text-center text-xl font-semibold text-slate-700">3</td>
+          <td class="py-4 px-8 text-center text-xl font-semibold text-emerald-600">12</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border-2 border-emerald-200">
+       <div class="flex items-center gap-3"><span class="text-3xl">🔹</span>
+        <p class="text-xl text-slate-700">نلاحظ أن المسافة تزيد <strong class="text-emerald-600">بنفس المقدار (+4)</strong> <span class="mx-2">←</span> <span class="bg-emerald-500 text-white px-4 py-1 rounded-full font-bold">سرعة ثابتة</span></p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Graphs Representation -->
+    <section id="graphs" class="section hidden">
+     <div class="space-y-8 slide-in"><!-- Position-Time Graph -->
+      <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100">
+       <div class="flex items-center gap-4 mb-6">
+        <div class="w-14 h-14 bg-gradient-to-br from-violet-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">1️⃣</span>
+        </div>
+        <h2 class="text-3xl font-extrabold text-violet-600">منحنى (الموقع – الزمن)</h2>
+       </div>
+       <div class="grid md:grid-cols-2 gap-8">
+        <div class="graph-container rounded-2xl p-6 border-2 border-sky-200">
+         <svg viewbox="0 0 300 200" class="w-full h-48"><!-- Grid --> <defs>
+           <pattern id="grid1" width="30" height="20" patternunits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 20" fill="none" stroke="#e0e7ff" stroke-width="1" />
+           </pattern>
+          </defs> <rect width="300" height="200" fill="url(#grid1)" /> <!-- Axes --> <line x1="40" y1="160" x2="280" y2="160" stroke="#475569" stroke-width="2" /> <line x1="40" y1="160" x2="40" y2="20" stroke="#475569" stroke-width="2" /> <!-- Labels --> <text x="160" y="190" text-anchor="middle" fill="#475569" font-size="14" font-weight="bold">
+           الزمن
+          </text> <text x="15" y="90" text-anchor="middle" fill="#475569" font-size="14" font-weight="bold" transform="rotate(-90, 15, 90)">
+           الموقع
+          </text> <!-- Lines --> <line x1="50" y1="140" x2="250" y2="40" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round" /> <text x="180" y="70" fill="#8b5cf6" font-size="12" font-weight="bold">
+           خط مائل = سرعة ثابتة
+          </text> <line x1="50" y1="100" x2="150" y2="100" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" /> <text x="100" y="120" fill="#f59e0b" font-size="12" font-weight="bold">
+           خط أفقي = سكون
+          </text>
+         </svg>
+        </div>
+        <div class="space-y-4">
+         <div class="flex items-center gap-2 mb-4"><span class="w-3 h-3 bg-slate-500 rounded-full"></span> <span class="font-medium">المحور الأفقي: <strong class="text-sky-600">الزمن</strong></span>
+         </div>
+         <div class="flex items-center gap-2 mb-6"><span class="w-3 h-3 bg-slate-500 rounded-full"></span> <span class="font-medium">المحور الرأسي: <strong class="text-sky-600">الموقع</strong></span>
+         </div>
+         <div class="space-y-3">
+          <div class="flex items-center gap-3 bg-violet-50 rounded-xl p-3 border border-violet-200"><span class="text-violet-500 font-bold">📈</span> <span>خط مستقيم مائل ⟵ <strong class="text-violet-600">سرعة ثابتة</strong></span>
+          </div>
+          <div class="flex items-center gap-3 bg-amber-50 rounded-xl p-3 border border-amber-200"><span class="text-amber-500 font-bold">➡️</span> <span>خط أفقي ⟵ <strong class="text-amber-600">الجسم ساكن</strong></span>
+          </div>
+          <div class="flex items-center gap-3 bg-rose-50 rounded-xl p-3 border border-rose-200"><span class="text-rose-500 font-bold">〰️</span> <span>منحنى ⟵ <strong class="text-rose-600">سرعة متغيرة</strong></span>
+          </div>
+         </div>
+         <div class="bg-gradient-to-l from-violet-500 to-purple-500 text-white rounded-xl p-4 mt-4"><span class="text-xl">📌</span> <strong class="text-lg"> ميل الخط = السرعة</strong>
+         </div>
+        </div>
+       </div>
+      </div><!-- Velocity-Time Graph -->
+      <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100">
+       <div class="flex items-center gap-4 mb-6">
+        <div class="w-14 h-14 bg-gradient-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">2️⃣</span>
+        </div>
+        <h2 class="text-3xl font-extrabold text-rose-600">منحنى (السرعة – الزمن)</h2>
+       </div>
+       <div class="grid md:grid-cols-2 gap-8">
+        <div class="graph-container rounded-2xl p-6 border-2 border-sky-200">
+         <svg viewbox="0 0 300 200" class="w-full h-48"><defs>
+           <pattern id="grid2" width="30" height="20" patternunits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 20" fill="none" stroke="#fce7f3" stroke-width="1" />
+           </pattern>
+          </defs> <rect width="300" height="200" fill="url(#grid2)" /> <!-- Axes --> <line x1="40" y1="160" x2="280" y2="160" stroke="#475569" stroke-width="2" /> <line x1="40" y1="160" x2="40" y2="20" stroke="#475569" stroke-width="2" /> <!-- Labels --> <text x="160" y="190" text-anchor="middle" fill="#475569" font-size="14" font-weight="bold">
+           الزمن
+          </text> <text x="15" y="90" text-anchor="middle" fill="#475569" font-size="14" font-weight="bold" transform="rotate(-90, 15, 90)">
+           السرعة
+          </text> <!-- Lines --> <line x1="50" y1="80" x2="150" y2="80" stroke="#10b981" stroke-width="3" stroke-linecap="round" /> <text x="100" y="70" fill="#10b981" font-size="11" font-weight="bold">
+           سرعة ثابتة
+          </text> <line x1="160" y1="140" x2="260" y2="60" stroke="#f43f5e" stroke-width="3" stroke-linecap="round" /> <text x="220" y="80" fill="#f43f5e" font-size="11" font-weight="bold">
+           تسارع
+          </text>
+         </svg>
+        </div>
+        <div class="space-y-4">
+         <div class="flex items-center gap-2 mb-4"><span class="w-3 h-3 bg-slate-500 rounded-full"></span> <span class="font-medium">المحور الأفقي: <strong class="text-sky-600">الزمن</strong></span>
+         </div>
+         <div class="flex items-center gap-2 mb-6"><span class="w-3 h-3 bg-slate-500 rounded-full"></span> <span class="font-medium">المحور الرأسي: <strong class="text-sky-600">السرعة</strong></span>
+         </div>
+         <div class="space-y-3">
+          <div class="flex items-center gap-3 bg-emerald-50 rounded-xl p-3 border border-emerald-200"><span class="text-emerald-500 font-bold">➡️</span> <span>خط أفقي ⟵ <strong class="text-emerald-600">سرعة ثابتة</strong></span>
+          </div>
+          <div class="flex items-center gap-3 bg-rose-50 rounded-xl p-3 border border-rose-200"><span class="text-rose-500 font-bold">↗️</span> <span>خط مائل للأعلى ⟵ <strong class="text-rose-600">تسارع</strong></span>
+          </div>
+          <div class="flex items-center gap-3 bg-orange-50 rounded-xl p-3 border border-orange-200"><span class="text-orange-500 font-bold">↘️</span> <span>خط مائل للأسفل ⟵ <strong class="text-orange-600">تباطؤ</strong></span>
+          </div>
+          <div class="flex items-center gap-3 bg-slate-100 rounded-xl p-3 border border-slate-200"><span class="text-slate-500 font-bold">⬇️</span> <span>على محور الزمن ⟵ <strong class="text-slate-600">سكون</strong></span>
+          </div>
+         </div>
+         <div class="bg-gradient-to-l from-rose-500 to-pink-500 text-white rounded-xl p-4 mt-4"><span class="text-xl">📌</span> <strong class="text-lg"> المساحة تحت المنحنى = المسافة المقطوعة</strong>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Sequential Images -->
+    <section id="images" class="section hidden">
+     <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100 slide-in">
+      <div class="flex items-center gap-4 mb-6">
+       <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">🖼️</span>
+       </div>
+       <h2 class="text-3xl font-extrabold text-cyan-600">رابعًا: التمثيل بالصور المتتابعة</h2>
+      </div>
+      <p class="text-xl text-slate-600 mb-8">نرسم الجسم في <strong class="text-cyan-600">أزمنة متساوية</strong>:</p>
+      <div class="space-y-8"><!-- Constant Speed -->
+       <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border-2 border-emerald-200">
+        <h3 class="font-bold text-xl text-emerald-700 mb-4 flex items-center gap-2"><span>🟢</span> مسافات متساوية ⟵ سرعة ثابتة</h3>
+        <div class="bg-white rounded-xl p-4 flex items-center justify-center gap-8">
+         <div class="flex items-center gap-8">
+          <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+         </div>
+        </div>
+        <div class="flex justify-center gap-8 mt-2 text-sm text-slate-500"><span>t=0</span><span>t=1</span><span>t=2</span><span>t=3</span>
+        </div>
+       </div><!-- Acceleration -->
+       <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6 border-2 border-rose-200">
+        <h3 class="font-bold text-xl text-rose-700 mb-4 flex items-center gap-2"><span>🔴</span> مسافات متزايدة ⟵ تسارع</h3>
+        <div class="bg-white rounded-xl p-4 flex items-center justify-start">
+         <div class="flex items-center">
+          <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-6"></div>
+          <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-12"></div>
+          <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-20"></div>
+          <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+         </div>
+        </div>
+       </div><!-- Deceleration -->
+       <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border-2 border-amber-200">
+        <h3 class="font-bold text-xl text-amber-700 mb-4 flex items-center gap-2"><span>🟠</span> مسافات متناقصة ⟵ تباطؤ</h3>
+        <div class="bg-white rounded-xl p-4 flex items-center justify-start">
+         <div class="flex items-center">
+          <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-20"></div>
+          <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-12"></div>
+          <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+          <div class="w-6"></div>
+          <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+           🚗
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Summary -->
+    <section id="summary" class="section hidden">
+     <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100 slide-in">
+      <div class="flex items-center gap-4 mb-6">
+       <div class="w-14 h-14 bg-gradient-to-br from-sky-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">✍️</span>
+       </div>
+       <h2 class="text-3xl font-extrabold text-sky-600">ملخص سريع للاختبار</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+       <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-6 border-2 border-slate-200 hover:border-slate-400 transition-all">
+        <div class="flex items-center gap-3 mb-3"><span class="text-3xl">⏸️</span>
+         <h3 class="font-bold text-xl text-slate-700">الجسم الساكن</h3>
+        </div>
+        <p class="text-slate-600 text-lg">موقعه <strong>لا يتغير</strong> مع الزمن</p>
+       </div>
+       <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border-2 border-emerald-200 hover:border-emerald-400 transition-all">
+        <div class="flex items-center gap-3 mb-3"><span class="text-3xl">➡️</span>
+         <h3 class="font-bold text-xl text-emerald-700">السرعة الثابتة</h3>
+        </div>
+        <p class="text-slate-600 text-lg"><strong>خط مستقيم</strong> في منحنى (الموقع–الزمن)</p>
+       </div>
+       <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6 border-2 border-rose-200 hover:border-rose-400 transition-all">
+        <div class="flex items-center gap-3 mb-3"><span class="text-3xl">⚡</span>
+         <h3 class="font-bold text-xl text-rose-700">التسارع</h3>
+        </div>
+        <p class="text-slate-600 text-lg"><strong>تغير السرعة</strong> مع الزمن</p>
+       </div>
+       <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 border-2 border-violet-200 hover:border-violet-400 transition-all">
+        <div class="flex items-center gap-3 mb-3"><span class="text-3xl">📐</span>
+         <h3 class="font-bold text-xl text-violet-700">ميل المنحنى</h3>
+        </div>
+        <p class="text-slate-600 text-lg">ميل منحنى الموقع–الزمن = <strong>السرعة</strong></p>
+       </div>
+      </div>
+      <div class="mt-8 bg-gradient-to-l from-sky-500 to-cyan-500 rounded-2xl p-6 text-white">
+       <h3 class="font-bold text-xl mb-4 flex items-center gap-2"><span>💡</span> تذكر دائماً:</h3>
+       <ul class="space-y-2 text-lg">
+        <li class="flex items-center gap-2"><span>✓</span> <span>المساحة تحت منحنى (السرعة-الزمن) = المسافة المقطوعة</span></li>
+        <li class="flex items-center gap-2"><span>✓</span> <span>ميل منحنى (الموقع-الزمن) = السرعة</span></li>
+        <li class="flex items-center gap-2"><span>✓</span> <span>ميل منحنى (السرعة-الزمن) = التسارع</span></li>
+       </ul>
+      </div>
+     </div>
+    </section><!-- Interactive Section -->
+    <section id="interactive" class="section hidden">
+     <div class="card bg-white/90 rounded-3xl p-8 shadow-xl border border-sky-100 slide-in">
+      <div class="flex items-center gap-4 mb-6">
+       <div class="w-14 h-14 bg-gradient-to-br from-fuchsia-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-3xl">🎮</span>
+       </div>
+       <h2 class="text-3xl font-extrabold text-fuchsia-600">تجربة تفاعلية</h2>
+      </div>
+      <div class="bg-gradient-to-br from-fuchsia-50 to-pink-50 rounded-2xl p-6 border-2 border-fuchsia-200 mb-6">
+       <h3 class="font-bold text-xl text-fuchsia-700 mb-4">🚗 محاكاة الحركة</h3>
+       <div class="bg-white rounded-xl p-6 shadow-inner mb-4">
+        <div class="relative h-16 bg-gradient-to-l from-slate-200 to-slate-300 rounded-full overflow-hidden">
+         <div class="absolute top-0 left-0 h-full w-full flex items-center">
+          <div class="h-1 w-full bg-slate-400 opacity-50"></div>
+         </div>
+         <div id="car" class="absolute top-1/2 -translate-y-1/2 transition-all duration-100 text-4xl" style="right: 10px;">
+          🚗
+         </div>
+        </div>
+       </div>
+       <div class="grid md:grid-cols-3 gap-4 mb-4"><button onclick="startMotion('constant')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl"> سرعة ثابتة </button> <button onclick="startMotion('accelerate')" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl"> تسارع </button> <button onclick="startMotion('decelerate')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl"> تباطؤ </button>
+       </div><button onclick="resetCar()" class="w-full bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-6 rounded-xl transition-all"> 🔄 إعادة تعيين </button>
+      </div><!-- Quiz Section -->
+      <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 border-2 border-violet-200">
+       <h3 class="font-bold text-xl text-violet-700 mb-4">📝 اختبر معلوماتك</h3>
+       <div id="quiz-container">
+        <div id="question" class="text-lg font-medium text-slate-700 mb-4 p-4 bg-white rounded-xl"></div>
+        <div id="options" class="space-y-3"></div>
+        <div id="result" class="mt-4 p-4 rounded-xl hidden font-bold text-lg text-center"></div><button onclick="nextQuestion()" class="mt-4 w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl"> السؤال التالي </button>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-gradient-to-l from-sky-600 to-cyan-600 text-white py-6 px-4 mt-8">
+    <div class="max-w-6xl mx-auto text-center">
+     <p class="text-lg opacity-90">🎓 تمثيل الحركة - الفيزياء للصف الأول الثانوي</p>
+     <p class="text-sm opacity-70 mt-2">تعلم بمتعة وإبداع ✨</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'تمثيل الحركة',
+      subtitle: 'أول ثانوي',
+      background_color: '#f0f9ff',
+      primary_color: '#0ea5e9',
+      text_color: '#1e293b',
+      accent_color: '#8b5cf6',
+      secondary_color: '#10b981'
+    };
+
+    let config = { ...defaultConfig };
+
+    // Element SDK initialization
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          applyConfig();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                cfg.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                cfg.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                cfg.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['main_title', cfg.main_title || defaultConfig.main_title],
+          ['subtitle', cfg.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+
+    function applyConfig() {
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+      
+      document.body.style.setProperty('--bg-color', config.background_color || defaultConfig.background_color);
+      document.body.style.setProperty('--primary-color', config.primary_color || defaultConfig.primary_color);
+      document.body.style.setProperty('--text-color', config.text_color || defaultConfig.text_color);
+    }
+
+    // Section navigation
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.add('hidden');
+      });
+      
+      const targetSection = document.getElementById(sectionId);
+      targetSection.classList.remove('hidden');
+      targetSection.classList.remove('slide-in');
+      void targetSection.offsetWidth;
+      targetSection.classList.add('slide-in');
+      
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      if (sectionId === 'interactive') {
+        loadQuestion();
+      }
+    }
+
+    // Car animation
+    let animationId = null;
+    let carPosition = 10;
+
+    function startMotion(type) {
+      resetCar();
+      const car = document.getElementById('car');
+      const containerWidth = car.parentElement.offsetWidth - 50;
+      let speed = 0;
+      let position = 10;
+
+      function animate() {
+        if (type === 'constant') {
+          position += 3;
+        } else if (type === 'accelerate') {
+          speed += 0.1;
+          position += speed;
+        } else if (type === 'decelerate') {
+          speed = Math.max(0, 8 - position / 30);
+          position += speed;
+        }
+
+        if (position < containerWidth - 50) {
+          car.style.right = position + 'px';
+          carPosition = position;
+          animationId = requestAnimationFrame(animate);
+        }
+      }
+      
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function resetCar() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      const car = document.getElementById('car');
+      car.style.right = '10px';
+      carPosition = 10;
+    }
+
+    // Quiz
+    const questions = [
+      {
+        question: 'ماذا يعني الخط الأفقي في منحنى (الموقع-الزمن)؟',
+        options: ['سرعة ثابتة', 'الجسم ساكن', 'تسارع', 'تباطؤ'],
+        correct: 1
+      },
+      {
+        question: 'ميل منحنى (الموقع-الزمن) يمثل:',
+        options: ['المسافة', 'التسارع', 'السرعة', 'الزمن'],
+        correct: 2
+      },
+      {
+        question: 'المساحة تحت منحنى (السرعة-الزمن) تمثل:',
+        options: ['السرعة', 'التسارع', 'المسافة المقطوعة', 'الموقع'],
+        correct: 2
+      },
+      {
+        question: 'إذا كانت المسافات متزايدة في الصور المتتابعة، فهذا يعني:',
+        options: ['سرعة ثابتة', 'سكون', 'تسارع', 'تباطؤ'],
+        correct: 2
+      },
+      {
+        question: 'الخط المائل للأعلى في منحنى (السرعة-الزمن) يدل على:',
+        options: ['سكون', 'سرعة ثابتة', 'تسارع', 'تباطؤ'],
+        correct: 2
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+
+    function loadQuestion() {
+      const q = questions[currentQuestionIndex];
+      document.getElementById('question').textContent = q.question;
+      
+      const optionsContainer = document.getElementById('options');
+      optionsContainer.innerHTML = '';
+      
+      q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-right p-4 rounded-xl bg-white border-2 border-violet-200 hover:border-violet-400 hover:bg-violet-50 transition-all font-medium';
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(index);
+        optionsContainer.appendChild(btn);
+      });
+      
+      document.getElementById('result').classList.add('hidden');
+    }
+
+    function checkAnswer(selectedIndex) {
+      const q = questions[currentQuestionIndex];
+      const resultDiv = document.getElementById('result');
+      resultDiv.classList.remove('hidden');
+      
+      if (selectedIndex === q.correct) {
+        resultDiv.textContent = '✅ إجابة صحيحة! أحسنت!';
+        resultDiv.className = 'mt-4 p-4 rounded-xl font-bold text-lg text-center bg-emerald-100 text-emerald-700';
+      } else {
+        resultDiv.textContent = '❌ إجابة خاطئة. حاول مرة أخرى!';
+        resultDiv.className = 'mt-4 p-4 rounded-xl font-bold text-lg text-center bg-rose-100 text-rose-700';
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+      loadQuestion();
+    }
+
+    // Initial load
+    applyConfig();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cb1921300147e68',t:'MTc3MDYyMTI3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
